@@ -12,11 +12,12 @@ struct companys
   char month_name[8];
   char date[17];
 };
-struct tmp
-{
+struct tmp							// whether it  violates conditions of the task?
+{								
   char name[30];
 };
-
+// Function uses temporary structure to scan names before the string starting from the point, and then allocates memory
+// for necessary number of names of type "struct companys" and rewrite data in allocated memory.
 int scan_names(struct companys *company)
 {
   int i,j;
@@ -26,8 +27,9 @@ int scan_names(struct companys *company)
   {
     scanf_s("%s", arr[i].name);
     fflush(stdin);
-	if(arr[i].name[0] == '.')
+    if(arr[i].name[0] == '.')
     {
+       i--;
        break;
     }
   }
@@ -36,12 +38,11 @@ int scan_names(struct companys *company)
   {
 	  strcpy(company[j].name,arr[j].name);
   }
-  
   free(arr);
   return i+1;
 }
 
-int scan_tax(struct companys company[50], int n)
+int scan_tax(struct companys *company, int n)
 { 
   int i,j;
   for(i=0;i<n;i++)
@@ -52,7 +53,7 @@ int scan_tax(struct companys company[50], int n)
   return 0;
 }
 
-int scan_date(struct companys company[50],int n)
+int scan_date(struct companys *company,int n)
 {
   int i,j;
   for(i=0;i<n;i++)
