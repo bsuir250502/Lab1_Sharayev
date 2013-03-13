@@ -3,6 +3,7 @@
 #include <string.h>
 #include <malloc.h>
 
+/* enum month  {January, February, March, April, May, June, July, August, September, October, November, December};*/
 
 struct companys
 {
@@ -11,77 +12,49 @@ struct companys
   char month_name[8];
   char date[17];
 };
-
-int scan_names(struct companys);
-int scan_tax(struct companys,int);
-int scan_date(struct companys,int);
-
-int main()
+struct tmp
 {
-  int j,i,n,*arr,bf; 					// i,j - array steps, n - number of companys, bf - buffer var, arr - array containing max taxes
-  char month_name[8];	
-  struct companys  company[50];					// temporary irrational space usage
-  arr=(int *)calloc(5,sizeof(int));
-  n=scan_names(company);
-  scan_tax(company,n);
-  scan_date(company,n);
-  printf("Set date (month) to check companys with max debts");
-  gets("%s", month_name);
-  bf=1000001;
-  for(i=0;i<5;i++)						// searching for max taxes(rubbishj)
-  {
-    for(j=0;j<n;j++)
-    {
-      if( (strcmp(company[i].month_name,month_name)) == 0)
-      {
-	if( (arr[i]<company[j].tax-48) && (company[j].tax-48<bf) )
-	{
-	  arr[i]= company[j].tax-48;
-	}
-      }
-    }
-    bf=arr[i];
-  }
+  char name[30];
+};
 
-  return 0;
-}
-
-int scan_names(struct companys company)
+int scan_names(struct companys *company)
 {
-  int i;
-  char *name;
-  name=(char *)malloc(30)
+  int i,j;
+  struct tmp *arr;
+  arr=(struct tmp *)malloc(50 * sizeof(struct tmp) );
   for(i=0;i<50;i++)
   {
-    scanf_s("%s", company[i].name);
-    if(name[0]!='.')
-    {
-      strcpy(company[i].name,name);
-    }
-    else 
-    {
-      free(name);
-      break;
-    }
+    scanf_s("%s", arr[i].name);
     fflush(stdin);
+	if(arr[i].name[0] == '.')
+    {
+       break;
+    }
   }
+  company=(struct companys *)malloc(i * sizeof(struct companys) );
+  for(j=0;j<i;j++) 
+  {
+	  strcpy(company[j].name,arr[j].name);
+  }
+  
+  free(arr);
   return i+1;
 }
 
-int scan_tax(struct companys company, int n)
+int scan_tax(struct companys company[50], int n)
 { 
-  int i;j
+  int i,j;
   for(i=0;i<n;i++)
   {
-    fscanf("%d\n", company[i].tax);
+    scanf_s("%s", company[i].tax);
     fflush(stdin);
   }
   return 0;
 }
 
-int scan_date(struct companys company,int n);
+int scan_date(struct companys company[50],int n)
 {
-  int i;j
+  int i,j;
   for(i=0;i<n;i++)
   {
     scanf_s("%s", company[i].month_name);
@@ -94,3 +67,19 @@ int scan_date(struct companys company,int n);
   }
   return 0;  
 }
+
+int main()
+{
+  int j,i,n; 					// i,j - array steps, n - number of companys
+  char month_name[8];	
+  struct companys  *company,bf;				
+  arr=(int *)calloc(5,sizeof(int));
+  n=scan_names(company);
+  scan_tax(company,n);
+  scan_date(company,n);
+  printf("Set date (month) to check companys with max debts");
+  gets(month_name);
+ 
+  return 0;
+}
+
