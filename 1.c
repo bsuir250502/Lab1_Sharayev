@@ -24,6 +24,7 @@ int scan_names(struct companys *comp)
   int i,j;
   struct tmp *arr;
   arr=(struct tmp *)malloc(50 * sizeof(struct tmp) );
+  printf("Set names of companys:\n");
   for(i=0;i<50;i++)
   {
     scanf_s("%s", arr[i].name);
@@ -46,6 +47,7 @@ int scan_names(struct companys *comp)
 int scan_tax(struct companys *comp, int n)
 { 
   int i,j;
+  printf("Set taxes:\n");
   for(i=0;i<n;i++)
   {
     scanf_s("%s", comp[i].tax);
@@ -81,10 +83,12 @@ int valid_input(char* month_name)
 int scan_dates(struct companys *comp,int n)
 {
   int i,j;
+  printf("Set the latest date for tax payment:\n");
   for(i=0;i<n;i++)
   {
     comp[i].month_numb = valid_input(comp[i].month_name);	
   }
+  printf("Set the actual date for tax payment:\n");
   for(i=0;i<n;i++)
   {
     comp[i].rep_month_numb = valid_input(comp[i].month_name);
@@ -137,7 +141,7 @@ int main()
   printf("List of companies with the most outstanding tax before the %s:", month_name);
   for(i=0;i<5;i++)
   {
-	  printf("%d. %s %4s ", i, comp[i].name, comp[i].tax);
+	  printf("%d. %s %4s\n", i, comp[i].name, comp[i].tax);
   }
 
   return 0;
