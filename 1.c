@@ -74,7 +74,6 @@ int main()
   int j,i,n; 					// i,j - array steps, n - number of companys
   char month_name[8];	
   struct companys  *company,bf;				
-  arr=(int *)calloc(5,sizeof(int));
   n=scan_names(company);
   scan_tax(company,n);
   scan_date(company,n);
