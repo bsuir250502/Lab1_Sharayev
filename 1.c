@@ -54,20 +54,6 @@ int scan_tax(struct companys *comp, int n)
   return 0;
 }
 
-int scan_date(struct companys *comp,int n)
-{
-  int i,j;
-  for(i=0;i<n;i++)
-  {
-    comp[i].month_numb = valid_input(comp[i].month_name);	
-  }
-  for(i=0;i<n;i++)
-  {
-    comp[i].rep_month_numb = valid_input(comp[i].month_name);
-  }
-  return 0;  
-}
-
 int valid_input(char* month_name)
 {
 	int i,month_number;
@@ -93,6 +79,20 @@ int valid_input(char* month_name)
 }
 
 
+int scan_dates(struct companys *comp,int n)
+{
+  int i,j;
+  for(i=0;i<n;i++)
+  {
+    comp[i].month_numb = valid_input(comp[i].month_name);	
+  }
+  for(i=0;i<n;i++)
+  {
+    comp[i].rep_month_numb = valid_input(comp[i].month_name);
+  }
+  return 0;  
+}
+
 int main()
 {
   int j,i,n,month_number,k=5; 					// i,j - array steps, n - number of companys
@@ -101,7 +101,7 @@ int main()
   struct companys  *comp,bf;				
   n=scan_names( comp );
   scan_tax(comp, n);
-  scan_date(comp, n);
+  scan_dates(comp, n);
   printf("Set date (month) to check companys with max debts");
   month_number = valid_input(month_name);
 
