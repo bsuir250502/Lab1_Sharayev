@@ -37,7 +37,7 @@ int scan_names(struct companys *comp)
   comp=(struct companys *)malloc(i * sizeof(struct companys) );
   for(j=0;j<i;j++) 
   {
-	  strcpy(comp[j].name,arr[j].name);
+    strcpy(comp[j].name,arr[j].name);
   }
   free(arr);
   return i+1;
@@ -56,26 +56,25 @@ int scan_tax(struct companys *comp, int n)
 
 int valid_input(char* month_name)
 {
-	int i,month_number;
-	char list_of_months[12][10]=
-	{"January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-
-	while(1)
-	{
-		scanf_s("%s", month_name);
-		fflush(stdin);
-		for(i=0;i<12;i++)
-		{
-			if ( (strcmp(list_of_months[i],month_name)) == 0 )
-			{
-				month_number=i;
-				break;
-				break;
-			}
-		}
-		printf("Invalid input");
-	}
-	return month_number;
+  int i,month_number;
+  char list_of_months[12][10]=
+  {"January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+  while(1)
+  {
+    scanf_s("%s", month_name);
+    fflush(stdin);
+    for(i=0;i<12;i++)
+    {
+      if ( (strcmp(list_of_months[i],month_name)) == 0 )
+      {
+        month_number=i;
+        break;
+        break;
+      }
+    }
+    printf("Invalid input");
+  }
+  return month_number;
 }
 
 
