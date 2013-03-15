@@ -13,7 +13,7 @@ struct companys
   int  rep_month_numb;
 };
 
-struct tmp							// whether it  violates conditions of the task?
+struct tmp  						// whether it  violates conditions of the task?
 {								
   char name[30];
 };
@@ -57,7 +57,7 @@ int scan_tax(struct companys *comp, int n)
 int valid_input(char* month_name)
 {
   int i,month_number;
-  char list_of_months[12][10]=
+  char list_of_months[][10]=
   {"January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
   while(1)
   {
@@ -94,15 +94,51 @@ int scan_dates(struct companys *comp,int n)
 
 int main()
 {
-  int j,i,n,month_number,k=5; 					// i,j - array steps, n - number of companys
-  
+  int j,i,n,month_number,better_numb; 					// i,j - array steps, n - number of companys
   char month_name[8];	
   struct companys  *comp,bf;				
+ 
   n=scan_names( comp );
   scan_tax(comp, n);
   scan_dates(comp, n);
+  
   printf("Set date (month) to check companys with max debts");
   month_number = valid_input(month_name);
+  
+  for(i=0;i<5;i++)
+  {
+	for(j=i;j<n;j++)
+	{
+		better_numb=i;
+		if( (comp[j].rep_month_numb<month_number) && (comp[better_numb].tax<comp[j].tax) )
+		{
+			better_numb=j;
+		}
+	}
+	bf=comp[i];
+	comp[i]=comp[better_numb];
+	comp[better_numb]=bf;
+  }
+  for(i=0;i<5;i++)
+  {
+	for(j=i;j<5;j++)
+	{
+		better_numb=i;
+		if(comp[j].name[0]<comp[better_numb].name[0])
+		{
+		better_numb=j;
+		}
+	}
+	bf=comp[i];
+	comp[i]=comp[better_numb];
+	comp[better_numb]=bf;
+  }
+
+  printf("List of companies with the most outstanding tax before the %s:", month_name);
+  for(i=0;i<5;i++)
+  {
+	  printf("%d. %s %4s ", i, comp[i].name, comp[i].tax);
+  }
 
   return 0;
 }
