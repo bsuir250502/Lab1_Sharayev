@@ -13,17 +13,18 @@ typedef struct
   int  rep_month_numb;
 }companys;
 
-struct tmp  						// whether it  violates conditions of the task?
+ typedef struct   						// whether it  violates conditions of the task?
 {								
   char name[30];
-};
+}tmp;
 // Function uses temporary structure to scan names before the string starting from the point, and then allocates memory
 // for necessary number of names of type "struct companys" and rewrite data in allocated memory.
-int scan_names(companys *comp)
+companys* scan_names(int n)
 {
   int i,j;
-  struct tmp *arr;
-  arr=(struct tmp *)malloc(50 * sizeof(struct tmp) );
+  companys *comp;
+  tmp *arr;
+  arr=(tmp *)malloc(50 * sizeof(tmp) );
   printf("Set names of companys:\n");
   for(i=0;i<50;i++)
   {
@@ -40,8 +41,9 @@ int scan_names(companys *comp)
   {
     strcpy(comp[j].name,arr[j].name);
   }
+  n=i;
   free(arr);
-  return i+1;
+  return comp;
 }
 
 int scan_tax(companys *comp, int n)
@@ -102,7 +104,9 @@ int main()
   char month_name[8];	
   companys  *comp,bf;				
  
-  n=scan_names( comp );
+  n=50;
+
+  comp=scan_names( n );
   scan_tax(comp, n);
   scan_dates(comp, n);
   
