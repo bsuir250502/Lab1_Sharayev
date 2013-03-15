@@ -3,7 +3,7 @@
 #include <string.h>
 #include <malloc.h>
 
-struct companys
+typedef struct 
 {
   char name[30];
   char tax[7];
@@ -11,7 +11,7 @@ struct companys
   int  month_numb;
   char rep_month_name[10];
   int  rep_month_numb;
-};
+}companys;
 
 struct tmp  						// whether it  violates conditions of the task?
 {								
@@ -19,7 +19,7 @@ struct tmp  						// whether it  violates conditions of the task?
 };
 // Function uses temporary structure to scan names before the string starting from the point, and then allocates memory
 // for necessary number of names of type "struct companys" and rewrite data in allocated memory.
-int scan_names(struct companys *comp)
+int scan_names(companys *comp)
 {
   int i,j;
   struct tmp *arr;
@@ -35,7 +35,7 @@ int scan_names(struct companys *comp)
        break;
     }
   }
-  comp=(struct companys *)malloc(i * sizeof(struct companys) );
+  comp=(companys *)malloc(i * sizeof(companys) );
   for(j=0;j<i;j++) 
   {
     strcpy(comp[j].name,arr[j].name);
@@ -44,7 +44,7 @@ int scan_names(struct companys *comp)
   return i+1;
 }
 
-int scan_tax(struct companys *comp, int n)
+int scan_tax(companys *comp, int n)
 { 
   int i,j;
   printf("Set taxes:\n");
@@ -80,7 +80,7 @@ int valid_input(char* month_name)
 }
 
 
-int scan_dates(struct companys *comp,int n)
+int scan_dates(companys *comp,int n)
 {
   int i,j;
   printf("Set the latest date for tax payment(month with a capital letter):\n");
@@ -100,7 +100,7 @@ int main()
 {
   int j,i,n,month_number,better_numb; 					// i,j - array steps, n - number of companys
   char month_name[8];	
-  struct companys  *comp,bf;				
+  companys  *comp,bf;				
  
   n=scan_names( comp );
   scan_tax(comp, n);
