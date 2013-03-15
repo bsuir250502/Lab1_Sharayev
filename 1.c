@@ -83,12 +83,12 @@ int valid_input(char* month_name)
 int scan_dates(struct companys *comp,int n)
 {
   int i,j;
-  printf("Set the latest date for tax payment:\n");
+  printf("Set the latest date for tax payment(month with a capital letter):\n");
   for(i=0;i<n;i++)
   {
     comp[i].month_numb = valid_input(comp[i].month_name);	
   }
-  printf("Set the actual date for tax payment:\n");
+  printf("Set the actual date for tax payment (month with a capital letter):\n");
   for(i=0;i<n;i++)
   {
     comp[i].rep_month_numb = valid_input(comp[i].month_name);
