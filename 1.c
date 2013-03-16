@@ -66,7 +66,7 @@ int valid_input(char* month_name)
   {"January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
   while(1)
   {
-    fgets(month_name,8,stdin);
+    fgets(month_name,10,stdin);
     fflush(stdin);
     for(i=0;i<12;i++)
     {
@@ -85,7 +85,7 @@ int valid_input(char* month_name)
 
 int scan_dates(companys *comp,int n)
 {
-  int i,j;
+  int i;
   printf("Set the latest date for tax payment(month with a capital letter):\n");
   for(i=0;i<n;i++)
   {
@@ -102,7 +102,7 @@ int scan_dates(companys *comp,int n)
 int main()
 {
   int j,i,n,month_number,better_numb; 					// i,j - array steps, n - number of companys
-  char month_name[8];	
+  char month_name[10];	
   companys  *comp,bf;				
  
   n=50;
@@ -146,7 +146,7 @@ int main()
   printf("List of companies with the most outstanding tax before the %s:", month_name);
   for(i=0;i<5;i++)
   {
-	  printf("%d. %s %4s\n", i, comp[i].name, comp[i].tax);
+	 printf("%d. %s %4s\n", i, comp[i].name, comp[i].tax);
   }
 
   return 0;
