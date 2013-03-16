@@ -41,7 +41,7 @@ companys* scan_names(int n)
   {
     strcpy(comp[j].name,arr[j].name);
   }
-  n=i;
+  n=i+1;
   free(arr);
   return comp;
 }
