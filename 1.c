@@ -26,22 +26,23 @@ companys* scan_names(int n)
   tmp *arr;
   arr=(tmp *)malloc(50 * sizeof(tmp) );
   printf("Set names of companys:\n");
-  for(i=0;i<50;i++)
+  for(i=0;i<n;i++) 
   {
-    scanf_s("%s", arr[i].name);
+    fgets(arr[i].name,30,stdin);
     fflush(stdin);
     if(arr[i].name[0] == '.')
     {
-       i--;
        break;
     }
   }
-  comp=(companys *)malloc(i * sizeof(companys) );
-  for(j=0;j<i;j++) 
+  n=i;
+  comp=(companys *)malloc(n * sizeof(companys) );
+  
+  for(j=0;j<n;j++) 
   {
     strcpy(comp[j].name,arr[j].name);
   }
-  n=i+1;
+  
   free(arr);
   return comp;
 }
@@ -49,10 +50,10 @@ companys* scan_names(int n)
 int scan_tax(companys *comp, int n)
 { 
   int i,j;
-  printf("Set taxes:\n");
+  printf("Set taxes %d:\n",n);
   for(i=0;i<n;i++)
   {
-    scanf_s("%s", comp[i].tax);
+    fgets(comp[i].tax,7,stdin);
     fflush(stdin);
   }
   return 0;
@@ -65,7 +66,7 @@ int valid_input(char* month_name)
   {"January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
   while(1)
   {
-    scanf_s("%s", month_name);
+    fgets(month_name,8,stdin);
     fflush(stdin);
     for(i=0;i<12;i++)
     {
@@ -107,8 +108,8 @@ int main()
   n=50;
 
   comp=scan_names( n );
-  scan_tax(comp, n);
-  scan_dates(comp, n);
+  scan_tax( comp, n );
+  scan_dates( comp, n );
   
   printf("Set date (month) to check companys with max debts");
   month_number = valid_input(month_name);
