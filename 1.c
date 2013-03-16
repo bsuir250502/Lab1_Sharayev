@@ -6,7 +6,7 @@
 typedef struct 
 {
   char name[30];
-  char tax[7];
+  char tax[8];
   char month_name[10];
   int  month_numb;
   char rep_month_name[10];
@@ -38,9 +38,9 @@ companys* scan_names(int n)
   n=i;
   comp=(companys *)malloc(n * sizeof(companys) );
   
-  for(j=0;j<n;j++) 
+  for(i=0;i<n;i++) 
   {
-    strcpy(comp[j].name,arr[j].name);
+    strcpy(comp[i].name,arr[i].name);
   }
   
   free(arr);
@@ -53,7 +53,7 @@ int scan_tax(companys *comp, int n)
   printf("Set taxes %d:\n",n);
   for(i=0;i<n;i++)
   {
-    fgets(comp[i].tax,7,stdin);
+    fgets(comp[i].tax, 8, stdin);
     fflush(stdin);
   }
   return 0;
