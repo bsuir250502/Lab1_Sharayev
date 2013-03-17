@@ -28,19 +28,19 @@ companys* scan_names(int n)
   printf("Set names of companys:\n");
   for(i=0;i<n;i++) 
   {
-    fgets(arr[i].name,30,stdin);
-    fflush(stdin);
-    if(arr[i].name[0] == '.')
-    {
-       break;
-    }
+  	fgets(arr[i].name,30,stdin);
+  	fflush(stdin);
+  	if(arr[i].name[0] == '.')
+  	{
+	break;
+  	}
   }
   n=i;
   comp=(companys *)malloc(n * sizeof(companys) );
   
   for(i=0;i<n;i++) 
   {
-    strcpy(comp[i].name,arr[i].name);
+  	strcpy(comp[i].name,arr[i].name);
   }
   
   free(arr);
@@ -53,8 +53,8 @@ int scan_tax(companys *comp, int n)
   printf("Set taxes %d:\n",n);
   for(i=0;i<n;i++)
   {
-    fgets(comp[i].tax, 8, stdin);
-    fflush(stdin);
+  	fgets(comp[i].tax, 8, stdin);
+  	fflush(stdin);
   }
   return 0;
 }
@@ -66,18 +66,18 @@ int valid_input(char* month_name)
   {"January","February","March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
   while(1)
   {
-    fgets(month_name,10,stdin);
-    fflush(stdin);
-    for(i=0;i<12;i++)
-    {
-      if ( (strcmp(list_of_months[i],month_name)) == 0 )
-      {
-        month_number=i;
-        break;
-        break;
-      }
-    }
-    printf("Invalid input");
+  	fgets(month_name,10,stdin);
+  	fflush(stdin);
+  	for(i=0;i<12;i++)
+  	{
+   		if ( (strcmp(list_of_months[i],month_name)) == 0 )
+   		{
+  			month_number=i;
+  			break;
+  			break;
+  		}
+  	}
+  	printf("Invalid input");
   }
   return month_number;
 }
@@ -89,12 +89,12 @@ int scan_dates(companys *comp,int n)
   printf("Set the latest date for tax payment(month with a capital letter):\n");
   for(i=0;i<n;i++)
   {
-    comp[i].month_numb = valid_input(comp[i].month_name);	
+  	comp[i].month_numb = valid_input(comp[i].month_name);	
   }
   printf("Set the actual date for tax payment (month with a capital letter):\n");
   for(i=0;i<n;i++)
   {
-    comp[i].rep_month_numb = valid_input(comp[i].month_name);
+  	comp[i].rep_month_numb = valid_input(comp[i].month_name);
   }
   return 0;  
 }
