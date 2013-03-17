@@ -32,7 +32,7 @@ companys* scan_names(int n)
   	fflush(stdin);
   	if(arr[i].name[0] == '.')
   	{
-	break;
+		break;
   	}
   }
   n=i;
@@ -135,7 +135,7 @@ int main()
 		better_numb=i;
 		if(comp[j].name[0]<comp[better_numb].name[0])
 		{
-		better_numb=j;
+			better_numb=j;
 		}
 	}
 	bf=comp[i];
