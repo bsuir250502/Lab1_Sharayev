@@ -112,7 +112,7 @@ int main()
   scan_tax( comp, *n );
   scan_dates( comp, *n );
   
-  printf("Set date (month) to check companys with max debts");
+  printf("Set date (month) to check companys with max debts:\n");
   month_number = valid_input(month_name);
   
   for(i=0;i<5;i++)
