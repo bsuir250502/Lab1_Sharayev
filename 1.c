@@ -77,7 +77,7 @@ int valid_input(char* month_name)
   			break;
   		}
   	}
-  	printf("Invalid input");
+  	printf("Invalid input\n");
   }
   return month_number;
 }
