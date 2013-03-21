@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <malloc.h>
+#define N 5
 
 typedef struct {
     char name[30];
@@ -132,8 +133,8 @@ int main()
         comp[i] = comp[better_numb];
         comp[better_numb] = bf;
     }
-    for (i = 0; i < 5; i++) {
-        for (j = i; j < 5; j++)
+    for (i = 0; i < N; i++) {
+        for (j = i; j < N; j++)
         {
             better_numb = i;
             if (comp[j].name[0] < comp[better_numb].name[0])
@@ -149,7 +150,7 @@ int main()
     printf
         ("List of companies with the most outstanding tax before the %s:",
          month_name);
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < N; i++) {
         printf("%d. %s %4s\n", i, comp[i].name, comp[i].tax);
     }
 
