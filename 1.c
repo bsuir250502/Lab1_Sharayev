@@ -118,7 +118,7 @@ int main()
     printf("Set date (month) to check companies with max debts:\n");
     month_number = read_date();
 
-    for (i = 0; i < 5; i++) 
+    for (i = 0; i < N; i++) 
     {
         for (j = i; j < n; j++)
         {
