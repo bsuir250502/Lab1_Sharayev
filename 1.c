@@ -60,7 +60,7 @@ int read_date(void)
         {
             if ((strstr(list_of_months[i], date)) != NULL) 
             {
-                month_number = i+1;
+                month_number = (i+1)*100;
                 break;
             }
             else
