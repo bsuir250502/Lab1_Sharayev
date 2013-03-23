@@ -90,14 +90,14 @@ int read_date(void)
 int scan_dates(companies * comp, int n)
 {
     int i;
-    printf("Set the latest date for tax payment in American format(MMM DD YY):\n");
     for (i = 0; i < n; i++) 
     {
+		printf("Set the latest date for tax payment for company \"%s\":\n", comp[i].name);
         comp[i].last_date = read_date();
     }
-    printf("Set the actual date for tax payment in American format(MMM DD YY):\n");
     for (i = 0; i < n; i++) 
     {
+		printf("Set the actual date for tax payment for company \"%s\":\n", comp[i].name);
         comp[i].payment_date = read_date();
     }
     return 0;
