@@ -11,16 +11,24 @@ typedef struct {
     int payment_date;
 } companies;
 
-// Function uses temporary structure to scan names before the string starting from the point, and then allocates memory
-// for necessary number of names of type "struct companies" and rewrite data in allocated memory.
-companies *scan_names(int max, int *n)
+char* myfgets(char *str, int num)
+{
+	if( !(fgets(str, num, stdin)) ){
+		return 0;
+	}
+	else {
+	str[strlen(str)-1]='\0';
+	}
+	return str;
+}
+companies* scan_names(int max, int *n)
 {
     int i, j;
     companies *comp;
     char arr[50][30];
     printf("Set names of companies:\n");
     for (i = 0; i < max; i++) {
-        fgets(arr[i], 30, stdin);
+        myfgets(arr[i], 30);
         if (arr[i][0] == '.') 
         {
             break;
@@ -43,7 +51,7 @@ int scan_tax(companies * comp, int n)
     printf("Set taxes %d:\n", n);
     for (i = 0; i < n; i++) 
     {
-        fgets(comp[i].tax, 8, stdin);
+        myfgets(comp[i].tax, 8);
     }
     return 0;
 }
@@ -56,7 +64,7 @@ int read_date(void)
 "AUG", "SEP", "OCT", "NOV", "DEC" };
     while (!month_number) 
     {
-        fgets(date, 12, stdin);
+        myfgets(date, 12);
         for (i = 0; i < 12; i++)
         {
             if ((strstr(list_of_months[i], date)) != NULL) 
