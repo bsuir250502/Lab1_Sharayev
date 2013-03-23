@@ -7,8 +7,8 @@
 typedef struct {
     char name[30];
     char tax[8];
-    int last_date;
-    int payment_date;
+    long int last_date;
+    long int payment_date;
 } companies;
 
 char* myfgets(char *str, int num)
@@ -19,6 +19,7 @@ char* myfgets(char *str, int num)
 	else {
 	str[strlen(str)-1]='\0';
 	}
+	fflush(stdin);
 	return str;
 }
 companies* scan_names(int max, int *n)
@@ -56,42 +57,41 @@ int scan_tax(companies * comp, int n)
     return 0;
 }
 
-int read_date(void)
+long int read_date(void)
 {
-    int i, month_number = 0;
-    char date[12], list_of_months[][4] =
-        { "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL",
-"AUG", "SEP", "OCT", "NOV", "DEC" };
-    while (!month_number) 
+    int num, i;
+	long int  date = 0;
+    char month[10], list_of_months[][4] =
+        { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+"Aug", "Sep", "Oct", "Nov", "Dec" };
+	printf("  1)Specify the month: ");
+    while (!date) 
     {
-        myfgets(date, 12);
+        myfgets(month, 12);
         for (i = 0; i < 12; i++)
         {
-            if ((strstr(list_of_months[i], date)) != NULL) 
+            if ((strstr(list_of_months[i], month)) != NULL) 
             {
-                month_number = (i+1)*100;
+                date = (i+1)*100;
                 break;
             }
             else
             {
-                month_number = 0;
+                date = 0;
             }
         }
-        printf("Invalid input\n");
+		if (date == 0) {
+        printf("Invalid input, try again!\n");
+		}
     }
-	i=0;
-	while(date[i] != ' ') i++;
-	i++;
+	printf("  2)Specify the day: ");
+	scanf("%d", &num);
+	date+=num;
+	printf("  3)Specify the year(in format YYYY): ");
+	scanf("%d", &num);
+	date+=num*10000;
 
-	month_number+=(date[i++]-48)*10;
-	month_number+=(date[i++]-48);
-	i++;
-	month_number+=(date[i++]-48)*10000000;		// delicious solution
-	month_number+=(date[i++]-48)*1000000;
-	month_number+=(date[i++]-48)*100000;
-	month_number+=(date[i++]-48)*10000;
-
-    return month_number;
+    return date;
 }
 
 
@@ -113,7 +113,8 @@ int scan_dates(companies * comp, int n)
 
 int main()
 {
-    int j, i, n, month_number, better_numb;    // i,j - array steps, n - number of companies
+    int j, i, n, better_numb;
+    long int date;
     char month_name[10];
     companies *comp, bf;
 
@@ -124,14 +125,14 @@ int main()
     scan_dates(comp, n);
 
     printf("Set date (month) to check companies with max debts:\n");
-    month_number = read_date();
+    date = read_date();
 
     for (i = 0; i < N; i++) 
     {
         for (j = i; j < n; j++)
         {
             better_numb = i;
-            if ((comp[j].payment_date < month_number)
+            if ((comp[j].payment_date < date)
                 && (comp[better_numb].tax < comp[j].tax))
             {
                 better_numb = j;
@@ -156,10 +157,10 @@ int main()
     }
 
     printf
-        ("List of companies with the most outstanding tax before the %s:",
-         month_name);
+        ("List of companies with the most outstanding tax before the %ld:",
+         date);
     for (i = 0; i < N; i++) {
-        printf("%d. %s %4s\n", i, comp[i].name, comp[i].tax);
+        printf("%d. %s %4s\n", i+1, comp[i].name, comp[i].tax);
     }
 
     return 0;
