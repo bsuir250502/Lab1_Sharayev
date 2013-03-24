@@ -140,35 +140,6 @@ int main()
     printf("Set date (month) to check companies with max debts:\n");
     date = read_date();
 
-    for (i = 0; i < N; i++) 
-    {
-        for (j = i; j < n; j++)
-        {
-            better_numb = i;
-            if ((comp[j].payment_date < date)
-                && (comp[better_numb].tax < comp[j].tax))
-            {
-                better_numb = j;
-            }
-        }
-        bf = comp[i];
-        comp[i] = comp[better_numb];
-        comp[better_numb] = bf;
-    }
-    for (i = 0; i < N; i++) {
-        for (j = i; j < N; j++)
-        {
-            better_numb = i;
-            if (comp[j].name[0] < comp[better_numb].name[0])
-            {
-                better_numb = j;
-            }
-        }
-        bf = comp[i];
-        comp[i] = comp[better_numb];
-        comp[better_numb] = bf;
-    }
-
     printf
         ("List of companies with the most outstanding tax before the %ld:",
          date);
