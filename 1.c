@@ -22,6 +22,19 @@ char* myfgets(char *str, int num)
 	fflush(stdin);
 	return str;
 }
+
+int cmp_date(const void* a, const void* b)
+{
+    companies *ca=(companies *)a,*cb=(companies *)b;
+    return (int *)ca->payment_date-(int *)cb->payment_date;
+}
+
+int cmp_name(const void* a, const void* b)
+{
+    companies *ca=(companies *)a,*cb=(companies *)b;
+    return (int *)ca->name[0]-(int *)cb->name[0];
+}
+
 companies* scan_names(int max, int *n)
 {
     int i, j;
