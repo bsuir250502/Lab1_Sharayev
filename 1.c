@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <malloc.h>
-#define N 5
+#define Max_num_of_debtors 5
 
 typedef struct {
     char name[30];
@@ -132,7 +132,7 @@ int scan_dates(companies * comp, int n)
 
 int main()
 {
-    int j, i, n = 50, num_of_debtrs;
+    int j, i, n = 50, num_of_debtrs=0;
     long int date;
     companies *comp, bf;
     comp = scan_names(n,&n);
@@ -142,22 +142,18 @@ int main()
     printf("Set date (month) to check companies with max debts:\n");
     date = read_date();
     qsort(comp ,n ,sizeof(companies) ,cmp_tax_with_date_ch);
-    for(i=0;i<8;i++)
-    {
-        if((comp[i].payment_date <= comp[i].last_date) || (comp[i].payment_date == 0)){
-            num_of_debtrs=i;
-            break;
-        }
+    while((comp[i].payment_date >= comp[i].last_date) || (comp[i].payment_date == 0)){
+        num_of_debtrs++;
     }
     qsort(comp ,num_of_debtrs ,sizeof(companies) ,cmp_tax);
-    if(num_of_debtrs>N) {
-    num_of_debtrs=N;	
+    if(num_of_debtrs>num_of_debtrs) {
+    num_of_debtrs=Max_num_of_debtors;	
     }
     qsort(comp ,num_of_debtrs ,sizeof(companies) ,cmp_name);
     printf
         ("List of companies with the most outstanding tax before the %ld:",
          date);
-    for (i = 0; i < N; i++) {
+    for (i = 0; i < num_of_debtrs; i++) {
         printf("%d. %s %4s\n", i+1, comp[i].name, comp[i].tax);
     }
 
