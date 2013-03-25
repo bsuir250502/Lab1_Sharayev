@@ -19,7 +19,6 @@ char* myfgets(char *str, int num)
 	else {
 	str[strlen(str)-1]='\0';
 	}
-	fflush(stdin);
 	return str;
 }
 
