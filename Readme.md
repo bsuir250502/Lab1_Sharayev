@@ -1,24 +1,12 @@
-1)In the head module using functions "scan_names( struct company)" (*), "scan_tax(struct company, int)" (**) and 
-"scan_dates(struct company, int)" (***) enter information about structure's data.
-
-2)Enter the number of the month and validated by "valid_input(char* month_name)"(****) function
-
-3)Using "Selection sort" elements of array of structures are sorted by maximum taxes to the fifth largest element
-
-4)Using "Selection sort" five largest elements are sorted by first name letter.
-
-5) Data of fields of five structures with max taxes displayed on the screen alphabetically.
-
-
-(*) - /// allocates a temporary array that records the data on behalf of the company to the line that starts 
-with ".", after which the appropriate amount of memory allocated in the passed array, and returns the value of 
-the number of firms.
-
-(**) - Into the function passed the number of firms and an array of structures, after which there is input tax for
-each firm.
-
-(***) - Into the function passed the number of firms and an array of structures, then function using the
-"valid_input(char* month_name)"(****) scan last and actual date of the tax payment.
-
-(****) -  Using initialized array of months, function compares entered in her body  month with elements of array and
-in the case of coincidence returns the number of the month. Otherwise, the entry and comparison with the array anew.
+Вариант 5
+Обработать информацию о фирмах городов. Обработку прекратить, когда на запрос будет введено слово «end».
+Фирм в городе не более пятидесяти. Информация следующая: 
+- название фирмы (не более тридцати знаков); 
+- величина налогообложения (не более 1 млн. р. – в виде строки); 
+- дата (месяц – в виде строки) последнего срока внесения налога; 
+- дата его фактического внесения (строка). 
+В одной функции внести названия фирм, в другой – величину налога, в третьей – предельную дату внесения налога 
+и дату, когда налог погашен (если не внесен, то вводится нуль). В головном модуле для заданной даты (месяц) 
+вывести в алфавитном порядке пять фирм, имеющих максимальную задолженность. Глобальные переменные, системные
+функции, кроме функций ввода-вывода, не использовать. Исходный массив сохранить, новых массивов структур не
+создавать. Можно объявлять и вводить другую необходимую информацию.
