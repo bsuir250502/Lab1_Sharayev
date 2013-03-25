@@ -77,23 +77,21 @@ long int read_date(void)
     char month[10], list_of_months[][4] =
         { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
 "Aug", "Sep", "Oct", "Nov", "Dec" };
-	printf("  1)Specify the month: ");
+    printf("  1)Specify the month: ");
     while (!date) 
     {
         myfgets(month, 12);
         for (i = 0; i < 12; i++)
         {
-            if ((strstr(list_of_months[i], month)) != NULL) 
-            {
+            if ((strstr(list_of_months[i], month)) != NULL) {
                 date = (i+1)*100;
                 break;
             }
-            else
-            {
+            else {
                 date = 0;
             }
         }
-		if (date == 0) {
+	if (date == 0) {
         printf("Invalid input, try again!\n");
 		}
     }
@@ -113,12 +111,12 @@ int scan_dates(companies * comp, int n)
     int i;
     for (i = 0; i < n; i++) 
     {
-		printf("Set the latest date for tax payment for company \"%s\":\n", comp[i].name);
+	printf("Set the latest date for tax payment for company \"%s\":\n", comp[i].name);
         comp[i].last_date = read_date();
     }
     for (i = 0; i < n; i++) 
     {
-		printf("Set the actual date for tax payment for company \"%s\":\n", comp[i].name);
+	printf("Set the actual date for tax payment for company \"%s\":\n", comp[i].name);
         comp[i].payment_date = read_date();
     }
     return 0;
@@ -140,7 +138,7 @@ int main()
     printf("Set date (month) to check companies with max debts:\n");
     date = read_date();
     
-    qsort(comp ,5 ,sizeof(companies) ,cmp_name);
+    qsort(comp ,N ,sizeof(companies) ,cmp_name);
     printf
         ("List of companies with the most outstanding tax before the %ld:",
          date);
