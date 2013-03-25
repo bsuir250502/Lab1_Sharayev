@@ -23,11 +23,17 @@ char* myfgets(char *str, int num)
 	return str;
 }
 
+int cmp_tax_with_date_ch(const void* a, const void* b)
+{
+    companies *ca=(companies *)a,*cb=(companies *)b;
+    if((ca->payment_date >= ca->last_date) || (ca->payment_date == 0)) return -1;
+    if((cb->payment_date < cb->last_date) && (ca->payment_date != 0)) return 1;
+    return strcmp(cb->tax,ca->tax);
+}
+
 int cmp_tax(const void* a, const void* b)
 {
     companies *ca=(companies *)a,*cb=(companies *)b;
-	if((ca->payment_date >= ca->last_date) || (ca->payment_date == 0)) return -1;
-	if((cb->payment_date < cb->last_date) && (ca->payment_date != 0)) return 1;
     return strcmp(cb->tax,ca->tax);
 }
 
@@ -126,21 +132,28 @@ int scan_dates(companies * comp, int n)
 
 int main()
 {
-    int j, i, n, better_numb;
+    int j, i, n = 50, num_of_debtrs;
     long int date;
-    char month_name[10];
     companies *comp, bf;
-
-    n = 50;
-
     comp = scan_names(n,&n);
     scan_tax(comp, n);
     scan_dates(comp, n);
 
     printf("Set date (month) to check companies with max debts:\n");
     date = read_date();
-    qsort(comp ,n ,sizeof(companies) ,cmp_tax);
-    qsort(comp ,N ,sizeof(companies) ,cmp_name);
+    qsort(comp ,n ,sizeof(companies) ,cmp_tax_with_date_ch);
+    for(i=0;i<8;i++)
+    {
+        if((comp[i].payment_date <= comp[i].last_date) || (comp[i].payment_date == 0)){
+            num_of_debtrs=i;
+            break;
+        }
+    }
+    qsort(comp ,num_of_debtrs ,sizeof(companies) ,cmp_tax);
+    if(num_of_debtrs>N) {
+    num_of_debtrs=N;	
+    }
+    qsort(comp ,num_of_debtrs ,sizeof(companies) ,cmp_name);
     printf
         ("List of companies with the most outstanding tax before the %ld:",
          date);
