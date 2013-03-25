@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <malloc.h>
-#define Max_num_of_debtors 5
+#define Max_num_of_debtrs 5
 
 typedef struct {
     char name[30];
@@ -134,7 +134,7 @@ int main()
 {
     int j, i, n = 50, num_of_debtrs=0;
     long int date;
-    companies *comp, bf;
+    companies *comp;
     comp = scan_names(n,&n);
     scan_tax(comp, n);
     scan_dates(comp, n);
@@ -146,8 +146,8 @@ int main()
         num_of_debtrs++;
     }
     qsort(comp ,num_of_debtrs ,sizeof(companies) ,cmp_tax);
-    if(num_of_debtrs>num_of_debtrs) {
-    num_of_debtrs=Max_num_of_debtors;	
+    if(num_of_debtrs>Max_num_of_debtrs) {
+    num_of_debtrs=Max_num_of_debtrs;	
     }
     qsort(comp ,num_of_debtrs ,sizeof(companies) ,cmp_name);
     printf
@@ -156,6 +156,7 @@ int main()
     for (i = 0; i < num_of_debtrs; i++) {
         printf("%d. %s %4s\n", i+1, comp[i].name, comp[i].tax);
     }
-
+    
+    free(comp);
     return 0;
 }
