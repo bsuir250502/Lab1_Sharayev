@@ -137,7 +137,7 @@ int main()
 
     printf("Set date (month) to check companies with max debts:\n");
     date = read_date();
-    
+    qsort(comp ,n ,sizeof(companies) ,cmp_date);
     qsort(comp ,N ,sizeof(companies) ,cmp_name);
     printf
         ("List of companies with the most outstanding tax before the %ld:",
