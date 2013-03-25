@@ -26,7 +26,9 @@ char* myfgets(char *str, int num)
 int cmp_date(const void* a, const void* b)
 {
     companies *ca=(companies *)a,*cb=(companies *)b;
-    return (int *)ca->payment_date-(int *)cb->payment_date;
+    if((ca->payment_date >= ca->last_date) || (ca->payment_date == 0)) return 1;
+    if((cb->payment_date < cb->last_date) && (ca->payment_date != 0)) return -1;
+    return ca->payment_date-cb->payment_date;
 }
 
 int cmp_name(const void* a, const void* b)
