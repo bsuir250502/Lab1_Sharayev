@@ -32,7 +32,7 @@ int cmp_date(const void* a, const void* b)
 int cmp_name(const void* a, const void* b)
 {
     companies *ca=(companies *)a,*cb=(companies *)b;
-    return (int *)ca->name[0]-(int *)cb->name[0];
+    return ca->name[0]-cb->name[0];
 }
 
 companies* scan_names(int max, int *n)
