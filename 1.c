@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <malloc.h>
+#define Max_num_of_companies 50
 #define Max_num_of_debtrs 5
 
 typedef struct {
@@ -9,7 +10,7 @@ typedef struct {
     char tax[8];
     long int last_date;
     long int payment_date;
-} companies;
+} companies_t;
 
 char* myfgets(char *str, int num)
 {
@@ -24,7 +25,7 @@ char* myfgets(char *str, int num)
 
 int cmp_tax_with_date_ch(const void* a, const void* b)
 {
-    companies *ca=(companies *)a,*cb=(companies *)b;
+    companies_t *ca=(companies_t *)a,*cb=(companies_t *)b;
     if((ca->payment_date >= ca->last_date) || (ca->payment_date == 0)) return -1;
     if((cb->payment_date < cb->last_date) && (ca->payment_date != 0)) return 1;
     return strcmp(cb->tax,ca->tax);
@@ -32,23 +33,23 @@ int cmp_tax_with_date_ch(const void* a, const void* b)
 
 int cmp_tax(const void* a, const void* b)
 {
-    companies *ca=(companies *)a,*cb=(companies *)b;
+    companies_t *ca=(companies_t *)a,*cb=(companies_t *)b;
     return strcmp(cb->tax,ca->tax);
 }
 
 int cmp_name(const void* a, const void* b)
 {
-    companies *ca=(companies *)a,*cb=(companies *)b;
+    companies_t *ca=(companies_t *)a,*cb=(companies_t *)b;
     return ca->name[0]-cb->name[0];
 }
 
-companies* scan_names(int max, int *n)
+companies_t* scan_names(int *n)
 {
     int i, j;
-    companies *comp;
-    char arr[50][30];
+    companies_t *comp;
+    char arr[Max_num_of_companies][30];
     printf("Set names of companies:\n");
-    for (i = 0; i < max; i++) {
+    for (i = 0; i < Max_num_of_companies; i++) {
         myfgets(arr[i], 30);
         if (arr[i][0] == '.') 
         {
@@ -56,7 +57,7 @@ companies* scan_names(int max, int *n)
         }
     }
     *n = i;
-    comp = (companies *) malloc(*n * sizeof(companies));
+    comp = (companies_t *) malloc(*n * sizeof(companies_t));
 
     for (i = 0; i < *n; i++) 
     {
@@ -66,7 +67,7 @@ companies* scan_names(int max, int *n)
     return comp;
 }
 
-int scan_tax(companies * comp, int n)
+int scan_tax(companies_t * comp, int n)
 {
     int i, j;
     printf("Set taxes %d:\n", n);
@@ -112,8 +113,7 @@ long int read_date(void)
     return date;
 }
 
-
-int scan_dates(companies * comp, int n)
+int scan_dates(companies_t * comp, int n)
 {
     int i;
     for (i = 0; i < n; i++) 
@@ -131,24 +131,24 @@ int scan_dates(companies * comp, int n)
 
 int main()
 {
-    int j, i, n = 50, num_of_debtrs=0;
+    int j, i, n = Max_num_of_companies, num_of_debtrs=0;
     long int date;
-    companies *comp;
-    comp = scan_names(n,&n);
+    companies_t *comp;
+    comp = scan_names(&n);
     scan_tax(comp, n);
     scan_dates(comp, n);
 
     printf("Set date (month) to check companies with max debts:\n");
     date = read_date();
-    qsort(comp ,n ,sizeof(companies) ,cmp_tax_with_date_ch);
+    qsort(comp ,n ,sizeof(companies_t) ,cmp_tax_with_date_ch);
     while((comp[i].payment_date >= comp[i].last_date) || (comp[i].payment_date == 0)){
         num_of_debtrs++;
     }
-    qsort(comp ,num_of_debtrs ,sizeof(companies) ,cmp_tax);
+    qsort(comp ,num_of_debtrs ,sizeof(companies_t) ,cmp_tax);
     if(num_of_debtrs>Max_num_of_debtrs) {
     num_of_debtrs=Max_num_of_debtrs;	
     }
-    qsort(comp ,num_of_debtrs ,sizeof(companies) ,cmp_name);
+    qsort(comp ,num_of_debtrs ,sizeof(companies_t) ,cmp_name);
     printf
         ("List of companies with the most outstanding tax before the %ld:",
          date);
