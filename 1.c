@@ -140,7 +140,7 @@ int main()
 
     printf("Set date (month) to check companies with max debts:\n");
     date = read_date();
-    qsort(comp ,n ,sizeof(companies_t) ,cmp_tax_with_date_ch);
+    qsort(comp ,n ,sizeof(companies_t) ,cmp_tax_with_date_ch);				/*the separation of the debtors and payable by*/
     while((comp[i].payment_date >= comp[i].last_date) || (comp[i].payment_date == 0)){
         num_of_debtrs++;
     }
@@ -153,7 +153,7 @@ int main()
         ("List of companies with the most outstanding tax before the %ld:",
          date);
     for (i = 0; i < num_of_debtrs; i++) {
-        printf("%d. %s %4s\n", i+1, comp[i].name, comp[i].tax);
+        printf("%s %4s\n", comp[i].name, comp[i].tax);
     }
     
     free(comp);
