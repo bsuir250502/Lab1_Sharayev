@@ -23,14 +23,6 @@ char* myfgets(char *str, int num)
 	return str;
 }
 
-int cmp_tax_with_date_ch(const void* a, const void* b)
-{
-    companies_t *ca=(companies_t *)a,*cb=(companies_t *)b;
-    if((ca->payment_date >= ca->last_date) || (ca->payment_date == 0)) return -1;
-    if((cb->payment_date < cb->last_date) && (ca->payment_date != 0)) return 1;
-    return strcmp(cb->tax,ca->tax);
-}
-
 int cmp_tax(const void* a, const void* b)
 {
     companies_t *ca=(companies_t *)a,*cb=(companies_t *)b;
@@ -42,6 +34,29 @@ int cmp_name(const void* a, const void* b)
     companies_t *ca=(companies_t *)a,*cb=(companies_t *)b;
     return ca->name[0]-cb->name[0];
 }
+
+int mysort(companies_t *comp, long int date ,int n)
+{
+	int i,j = 0,num_of_debtrs;
+	companies_t buffer;
+	for(i = 0;i<n;i++){
+		if((comp[i].payment_date == 0) || (comp[i].payment_date > comp[i].last_date && date<comp[i].payment_date)) {
+		buffer=comp[i];
+		comp[i]=comp[j];
+		comp[j]=buffer;
+		j++;
+		}
+		
+	}
+	num_of_debtrs=j;
+	qsort(comp ,num_of_debtrs ,sizeof(companies_t) ,cmp_tax);
+	if(num_of_debtrs>Max_num_of_debtrs) {
+    num_of_debtrs=Max_num_of_debtrs;	
+    }
+	qsort(comp ,num_of_debtrs ,sizeof(companies_t) ,cmp_name);
+	return num_of_debtrs;
+}
+
 
 companies_t* scan_names(int *n)
 {
@@ -140,20 +155,11 @@ int main()
 
     printf("Set date (month) to check companies with max debts:\n");
     date = read_date();
-    qsort(comp ,n ,sizeof(companies_t) ,cmp_tax_with_date_ch);				/*the separation of the debtors and payable by*/
-    while((comp[i].payment_date >= comp[i].last_date) || (comp[i].payment_date == 0)){
-        num_of_debtrs++;
-    }
-    qsort(comp ,num_of_debtrs ,sizeof(companies_t) ,cmp_tax);
-    if(num_of_debtrs>Max_num_of_debtrs) {
-    num_of_debtrs=Max_num_of_debtrs;	
-    }
-    qsort(comp ,num_of_debtrs ,sizeof(companies_t) ,cmp_name);
+    num_of_debtrs=mysort(comp ,date , 8);
     printf
-        ("List of companies with the most outstanding tax before the %ld:",
-         date);
+        ("List of %d companies with the most outstanding tax:",num_of_debtrs);
     for (i = 0; i < num_of_debtrs; i++) {
-        printf("%s %4s\n", comp[i].name, comp[i].tax);
+        printf("%d. %s %4s\n",i+1, comp[i].name, comp[i].tax);
     }
     
     free(comp);
