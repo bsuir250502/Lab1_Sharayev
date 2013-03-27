@@ -7,6 +7,8 @@
 
 
 char* myfgets(char *, int);
+int cmp_tax(const void* , const void* );
+int cmp_name(const void* , const void*);
 
 
 #endif
