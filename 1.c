@@ -12,9 +12,7 @@ typedef struct {
     long int payment_date;
 } companies_t;
 
-char* myfgets(char *, int);
-int cmp_tax(const void* , const void* );
-int cmp_name(const void* , const void*);
+
 int mysort(companies_t *, long int  ,int);
 companies_t* scan_names(int *);
 int scan_tax(companies_t *, int );
