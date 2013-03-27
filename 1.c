@@ -14,13 +14,13 @@ typedef struct {
 
 char* myfgets(char *str, int num)
 {
-	if( !(fgets(str, num, stdin)) ){
-		return 0;
-	}
-	else {
-	str[strlen(str)-1]='\0';
-	}
-	return str;
+    if( !(fgets(str, num, stdin)) ){
+    	return 0;
+    }
+    else {
+    	str[strlen(str)-1]='\0';
+    }
+    return str;
 }
 
 int cmp_tax(const void* a, const void* b)
@@ -37,24 +37,24 @@ int cmp_name(const void* a, const void* b)
 
 int mysort(companies_t *comp, long int date ,int n)
 {
-	int i,j = 0,num_of_debtrs;
-	companies_t buffer;
-	for(i = 0;i<n;i++){
-		if((comp[i].payment_date == 0) || (comp[i].payment_date > comp[i].last_date && date<comp[i].payment_date)) {
-		buffer=comp[i];
-		comp[i]=comp[j];
-		comp[j]=buffer;
-		j++;
-		}
+    int i,j = 0,num_of_debtrs;
+    companies_t buffer;
+    for(i = 0;i<n;i++){
+        if((comp[i].payment_date == 0) || (comp[i].payment_date > comp[i].last_date && date<comp[i].payment_date)) {
+            buffer=comp[i];
+            comp[i]=comp[j];
+            comp[j]=buffer;
+            j++;
+        }
 		
-	}
-	num_of_debtrs=j;
-	qsort(comp ,num_of_debtrs ,sizeof(companies_t) ,cmp_tax);
-	if(num_of_debtrs>Max_num_of_debtrs) {
+    }
+    num_of_debtrs=j;
+    qsort(comp ,num_of_debtrs ,sizeof(companies_t) ,cmp_tax);
+    if(num_of_debtrs>Max_num_of_debtrs) {
     num_of_debtrs=Max_num_of_debtrs;	
     }
-	qsort(comp ,num_of_debtrs ,sizeof(companies_t) ,cmp_name);
-	return num_of_debtrs;
+    qsort(comp ,num_of_debtrs ,sizeof(companies_t) ,cmp_name);
+    return num_of_debtrs;
 }
 
 
@@ -73,12 +73,10 @@ companies_t* scan_names(int *n)
     }
     *n = i;
     comp = (companies_t *) malloc(*n * sizeof(companies_t));
-
-    for (i = 0; i < *n; i++) 
-    {
+    for (i = 0; i < *n; i++) {
         strncpy(comp[i].name, arr[i],30);
     }
-
+    
     return comp;
 }
 
@@ -96,7 +94,7 @@ int scan_tax(companies_t * comp, int n)
 long int read_date(void)
 {
     int num, i;
-	long int  date = 0;
+    long int  date = 0;
     char month[10], list_of_months[][4] =
         { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
 "Aug", "Sep", "Oct", "Nov", "Dec" };
@@ -116,14 +114,14 @@ long int read_date(void)
         }
 	if (date == 0) {
         printf("Invalid input, try again!\n");
-		}
+        }
     }
-	printf("  2)Specify the day: ");
-	scanf("%d", &num);
-	date+=num;
-	printf("  3)Specify the year(in format YYYY): ");
-	scanf("%d", &num);
-	date+=num*10000;
+    printf("  2)Specify the day: ");
+    scanf("%d", &num);
+    date+=num;
+    printf("  3)Specify the year(in format YYYY): ");
+    scanf("%d", &num);
+    date+=num*10000;
 
     return date;
 }
@@ -131,13 +129,11 @@ long int read_date(void)
 int scan_dates(companies_t * comp, int n)
 {
     int i;
-    for (i = 0; i < n; i++) 
-    {
+    for (i = 0; i < n; i++) {
 	printf("Set the latest date for tax payment for company \"%s\":\n", comp[i].name);
         comp[i].last_date = read_date();
     }
-    for (i = 0; i < n; i++) 
-    {
+    for (i = 0; i < n; i++) {
 	printf("Set the actual date for tax payment for company \"%s\":\n", comp[i].name);
         comp[i].payment_date = read_date();
     }
