@@ -12,6 +12,37 @@ typedef struct {
     long int payment_date;
 } companies_t;
 
+char* myfgets(char *, int);
+int cmp_tax(const void* , const void* );
+int cmp_name(const void* , const void*);
+int mysort(companies_t *, long int  ,int);
+companies_t* scan_names(int *);
+int scan_tax(companies_t *, int );
+long int read_date(void);
+int scan_dates(companies_t * comp, int n);
+
+int main()
+{
+    int j, i, n = Max_num_of_companies, num_of_debtrs=0;
+    long int date;
+    companies_t *comp;
+    comp = scan_names(&n);
+    scan_tax(comp, n);
+    scan_dates(comp, n);
+
+    printf("Set date (month) to check companies with max debts:\n");
+    date = read_date();
+    num_of_debtrs=mysort(comp ,date , 8);
+    printf
+        ("List of %d companies with the most outstanding tax:",num_of_debtrs);
+    for (i = 0; i < num_of_debtrs; i++) {
+        printf("%d. %s %4s\n",i+1, comp[i].name, comp[i].tax);
+    }
+    
+    free(comp);
+    return 0;
+}
+
 char* myfgets(char *str, int num)
 {
     if( !(fgets(str, num, stdin)) ){
@@ -46,7 +77,7 @@ int mysort(companies_t *comp, long int date ,int n)
             comp[j]=buffer;
             j++;
         }
-		
+
     }
     num_of_debtrs=j;
     qsort(comp ,num_of_debtrs ,sizeof(companies_t) ,cmp_tax);
@@ -56,7 +87,6 @@ int mysort(companies_t *comp, long int date ,int n)
     qsort(comp ,num_of_debtrs ,sizeof(companies_t) ,cmp_name);
     return num_of_debtrs;
 }
-
 
 companies_t* scan_names(int *n)
 {
@@ -137,27 +167,5 @@ int scan_dates(companies_t * comp, int n)
 	printf("Set the actual date for tax payment for company \"%s\":\n", comp[i].name);
         comp[i].payment_date = read_date();
     }
-    return 0;
-}
-
-int main()
-{
-    int j, i, n = Max_num_of_companies, num_of_debtrs=0;
-    long int date;
-    companies_t *comp;
-    comp = scan_names(&n);
-    scan_tax(comp, n);
-    scan_dates(comp, n);
-
-    printf("Set date (month) to check companies with max debts:\n");
-    date = read_date();
-    num_of_debtrs=mysort(comp ,date , 8);
-    printf
-        ("List of %d companies with the most outstanding tax:",num_of_debtrs);
-    for (i = 0; i < num_of_debtrs; i++) {
-        printf("%d. %s %4s\n",i+1, comp[i].name, comp[i].tax);
-    }
-    
-    free(comp);
     return 0;
 }
