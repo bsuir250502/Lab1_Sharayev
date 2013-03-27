@@ -34,7 +34,7 @@ int main()
     date = read_date();
     num_of_debtrs=mysort(comp ,date , 8);
     printf
-        ("List of %d companies with the most outstanding tax:",num_of_debtrs);
+        ("List of %d companies with the most outstanding tax:\n",num_of_debtrs);
     for (i = 0; i < num_of_debtrs; i++) {
         printf("%d. %s %4s\n",i+1, comp[i].name, comp[i].tax);
     }
