@@ -113,9 +113,9 @@ companies_t* scan_names(int *n)
 int scan_tax(companies_t * comp, int n)
 {
     int i, j;
-    printf("Set taxes %d:\n", n);
-    for (i = 0; i < n; i++) 
-    {
+    printf("Set taxes for company:\n");
+    for (i = 0; i < n; i++) {
+		printf("%s  - ",comp[i].name);
         myfgets(comp[i].tax, 8);
     }
     return 0;
