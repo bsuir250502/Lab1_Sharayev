@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <malloc.h>
+#include "mylib.h"
 #define Max_num_of_companies 50
 #define Max_num_of_debtrs 5
 
