@@ -6,7 +6,6 @@
 #define MAX_NUM_OF_DEBTRS 5
 #define SIZE( x ) (sizeof(x)/sizeof(*x))
 
-typedef long int date_t;
 typedef char tax_t[20];
 
 typedef struct {
@@ -31,7 +30,6 @@ int cmp_name(const void *a, const void *b)
 int mysort(company_t *, long int, int);
 company_t *scan_names(int *);
 int scan_tax(company_t *, int);
-long int read_date(void);
 int scan_dates(company_t * comp, int n);
 
 int main()
@@ -112,43 +110,6 @@ int scan_tax(company_t * comp, int n)
         myfgets(comp[i].tax, 8);
     }
     return 0;
-}
-
-long int read_date(void)
-{
-    char input_buffer[128];
-    int i, day, month, year;
-    long int date = 0;
-    char list_of_months[][4] =
-        { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
-        "Aug", "Sep", "Oct", "Nov", "Dec"
-    };
-
-    printf("  1)Specify the year(in format YYYY): ");
-    year = input_number_in_range(1970,2100);
-
-    printf("  3)Specify the month: ");
-    month = 0;
-    while (!month) {
-        myfgets(input_buffer, 12);
-        for (i = 0; i < 12; i++) {
-            if (!strncmp(input_buffer,list_of_months[i],3)) {
-                month = (i + 1);
-                break;
-            } else {
-                month = 0;
-            }
-        }
-        if (month == 0) {
-            printf("Invalid input, try again!\n");
-        }
-    }
-
-    printf("  3)Specify the day: ");
-    day = input_number_in_range(1,31);
-    date = year * 10000 + month * 100 + day;
-
-    return date;
 }
 
 int scan_dates(company_t * comp, int n)

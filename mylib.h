@@ -5,8 +5,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef long int date_t;
 
 char *myfgets(char *, int);
 int input_number_in_range(int from, int to);
+long int read_date(void);
 
 #endif
