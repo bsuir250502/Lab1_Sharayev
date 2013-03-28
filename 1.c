@@ -40,10 +40,6 @@ int main()
     companies = scan_names(&n);
     scan_tax(companies, n);
     scan_dates(companies, n);
-
-    for (i = 0; i < n; i++) {
-        printf("%d. %s %4ld\n", i + 1, companies[i].name, companies[i].tax);
-    }
     printf("Set date (month) to check companies with max debts:\n");
     date = read_date();
     num_of_debtrs = mysort(companies, date, n);
