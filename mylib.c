@@ -23,7 +23,7 @@ int input_number_in_range(int from, int to)
         myfgets(input_buffer, 128);
         n = strtol(input_buffer, &endptr, 10);
         first = 0;
-    } while( *endptr || n <= from || n >= to );
+    } while( *endptr || n < from || n > to );
     return n;
 }
 
