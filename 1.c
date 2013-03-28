@@ -120,7 +120,7 @@ int scan_dates(company_t * comp, int n)
                comp[i].name);
         comp[i].last_date = read_date();
         if(!comp[i].last_date) {
-            printf("Invalid input, try again");
+            printf("Invalid input, try again\n");
             i--;
         }
     }
