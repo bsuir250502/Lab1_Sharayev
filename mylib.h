@@ -6,9 +6,7 @@
 #include <string.h>
 
 
-char* myfgets(char *, int);
-int cmp_tax(const void* , const void* );
-int cmp_name(const void* , const void*);
-
+char *myfgets(char *, int);
+int input_number_in_range(int from, int to);
 
 #endif
