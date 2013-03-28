@@ -40,7 +40,7 @@ int main()
     companies = scan_names(&n);
     scan_tax(companies, n);
     scan_dates(companies, n);
-    printf("Set date (month) to check companies with max debts:\n");
+    printf("Set the date to check companies with max debts:\n");
     date = read_date();
     num_of_debtrs = mysort(companies, date, n);
     if(num_of_debtrs != 0){
@@ -68,7 +68,6 @@ int mysort(company_t * comp, long int date, int n)
             comp[j] = buffer;
             j++;
         }
-
     }
     num_of_debtrs = j;
     qsort(comp, num_of_debtrs, sizeof(company_t), cmp_tax);
@@ -76,9 +75,9 @@ int mysort(company_t * comp, long int date, int n)
         num_of_debtrs = MAX_NUM_OF_DEBTRS;
     }
     qsort(comp, num_of_debtrs, sizeof(company_t), cmp_name);
+    
     return num_of_debtrs;
 }
-
 
 company_t *scan_names(int *n)
 {
@@ -109,6 +108,7 @@ int scan_tax(company_t * comp, int n)
         printf("%s  - ", comp[i].name);
 		comp[i].tax = input_number_in_range(0, 1000000);
     }
+    
     return 0;
 }
 
@@ -116,7 +116,7 @@ int scan_dates(company_t * comp, int n)
 {
     int i;
     for (i = 0; i < n; i++) {
-        printf("Set the latest date for tax payment for company \"%s\":\n",
+        printf("Set the latest date of tax payment for company \"%s\":\n",
                comp[i].name);
         comp[i].last_date = read_date();
         if(!comp[i].last_date) {
