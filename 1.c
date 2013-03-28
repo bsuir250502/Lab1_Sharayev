@@ -47,13 +47,14 @@ int main()
     printf("Set date (month) to check companies with max debts:\n");
     date = read_date();
     num_of_debtrs = mysort(companies, date, n);
-    printf
-        ("List of %d companies with the most outstanding tax:\n",
-         num_of_debtrs);
+    if(num_of_debtrs != 0){
+    	printf
+		("List of %d companies with the most outstanding tax:\n",
+         	num_of_debtrs);
+    }
     for (i = 0; i < num_of_debtrs; i++) {
         printf("%d. %s %4ld\n", i + 1, companies[i].name, companies[i].tax);
     }
-	system("pause");
     free(companies);
     return 0;
 }
