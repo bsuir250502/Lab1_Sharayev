@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef long int date_t;
 
 char* myfgets(char *, int);
 int cmp_tax(const void* , const void* );
