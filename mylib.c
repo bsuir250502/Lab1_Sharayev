@@ -22,8 +22,11 @@ int input_number_in_range(int from, int to)
         }
         myfgets(input_buffer, 128);
         n = strtol(input_buffer, &endptr, 10);
+        if(n==0) {                                                      /*in case scan of paid tax*/
+			break;
+		}
         first = 0;
-    } while( *endptr || n < from || n > to );
+    } while( *endptr || n < from || n > to);
     return n;
 }
 
@@ -39,7 +42,9 @@ date_t read_date(void)
 
     printf("  1)Specify the year(in format YYYY): ");
     year = input_number_in_range(1970,2100);
-
+    if(year == 0) {                                                     /*in case scan of unpaid tax*/
+        return 0;
+    }
     printf("  3)Specify the month: ");
     month = 0;
     while (!month) {
