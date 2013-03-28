@@ -51,6 +51,7 @@ int main()
     for (i = 0; i < num_of_debtrs; i++) {
         printf("%d. %s %4ld\n", i + 1, companies[i].name, companies[i].tax);
     }
+    
     free(companies);
     return 0;
 }
@@ -60,9 +61,9 @@ int mysort(company_t * comp, long int date, int n)
     int i, j = 0, num_of_debtrs;
     company_t buffer;
     for (i = 0; i < n; i++) {
-        if ((comp[i].payment_date == 0)
+        if ( ((comp[i].payment_date == 0)
             || (comp[i].payment_date > comp[i].last_date
-                && date < comp[i].payment_date)) {
+                && date < comp[i].payment_date)) && comp[i].tax != 0) {
             buffer = comp[i];
             comp[i] = comp[j];
             comp[j] = buffer;
