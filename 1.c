@@ -32,11 +32,14 @@ company_t *scan_names(int *);
 int scan_tax(company_t *, int);
 int scan_dates(company_t * comp, int n);
 
-int main()
+int main(int argc, char **argv)
 {
     int i, n = MAX_NUM_OF_COMPANIES, num_of_debtrs = 0;
     long int date;
     company_t *companies;
+    
+    prnt_manual(argc,argv);
+    
     companies = scan_names(&n);
     scan_tax(companies, n);
     scan_dates(companies, n);
