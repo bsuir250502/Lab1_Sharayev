@@ -81,7 +81,7 @@ int prnt_manual(int argc,char **argv){
                "  - Month (with hight letter)"
                "  - day"
                "4)Set date to check companies with max debts in the same way"
-               "5)Program print companies(<5)with biggest taxes in alphabetical sequention")
+               "5)Program print companies(<5)with biggest taxes in alphabetical sequention");
     }
     return 0;
 }
