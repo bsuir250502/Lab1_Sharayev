@@ -68,3 +68,20 @@ date_t read_date(void)
 
     return date;
 }
+
+int prnt_manual(int argc,char **argv){
+    if(argc > 1 && !(strcmp(argv[1] ,"-h")) ) {
+        printf("____________________________\n"
+               "          Manual\n"
+               "____________________________\n"
+               "1)Set names of companies separated by \"Enter\""
+               "2)Set taxes of companies separated by \"Enter\""
+               "3)Specify dates of payment and last dates( \"0\", if the tax has not been paid)"
+               "  - Year(in YYYY format)"
+               "  - Month (with hight letter)"
+               "  - day"
+               "4)Set date to check companies with max debts in the same way"
+               "5)Program print companies(<5)with biggest taxes in alphabetical sequention")
+    }
+    return 0;
+}
