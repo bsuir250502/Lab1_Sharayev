@@ -75,7 +75,7 @@ int prnt_manual(int argc,char **argv){
                "          Manual\n"
                "____________________________\n"
                "1)Set names of companies separated by \"Enter\"\n"
-               "2)Set taxes of companies separated by \"Enter\""
+               "2)Set taxes of companies separated by \"Enter\"\n"
                "3)Specify dates of payment and last dates( \"0\", if the tax has not been paid)\n"
                "  - Year(in YYYY format)\n"
                "  - Month (with hight letter)\n"
