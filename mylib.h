@@ -7,8 +7,8 @@
 
 typedef long int date_t;
 
-char* myfgets(char *, int);
+char *myfgets(char *, int);
 int input_number_in_range(int, int, int);
-int prnt_manual(int ,char **);
+int prnt_manual(int, char **);
 
 #endif

@@ -17,21 +17,22 @@ int input_number_in_range(int from, int to, int include_zero)
     char input_buffer[128];
     int first = 1;
     do {
-        if(!first){
+        if (!first) {
             printf("Please enter number between %d and %d\n", from, to);
         }
         myfgets(input_buffer, 128);
         n = strtol(input_buffer, &endptr, 10);
-        if(n==0 && include_zero) {                                                      /*in case scan of paid tax*/
-			break;
-		}
+        if (n == 0 && include_zero) {   /*in case scan of paid tax */
+            break;
+        }
         first = 0;
-    } while( *endptr || n < from || n > to);
+    } while (*endptr || n < from || n > to);
     return n;
 }
 
-int prnt_manual(int argc,char **argv){
-    if(argc > 1 && !(strcmp(argv[1] ,"-h")) ) {
+int prnt_manual(int argc, char **argv)
+{
+    if (argc > 1 && !(strcmp(argv[1], "-h"))) {
         printf("____________________________\n"
                "          Manual\n"
                "____________________________\n"
