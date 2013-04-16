@@ -9,6 +9,6 @@ typedef long int date_t;
 
 char *myfgets(char *, int);
 int input_number_in_range(int, int, int);
-int prnt_manual(int, char **);
+int print_manual(void);
 
 #endif

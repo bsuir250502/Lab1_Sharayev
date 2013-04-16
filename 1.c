@@ -25,6 +25,7 @@ int scan_dates(company_t * comp, int n);
 long int read_date(bool_value_t);
 int cmp_name(const void *, const void *);
 int cmp_tax(const void *, const void *);
+char read_argument(int, char **);
 
 int main(int argc, char **argv)
 {
@@ -32,7 +33,10 @@ int main(int argc, char **argv)
     long int date;
     company_t *companies;
 
-    prnt_manual(argc, argv);
+    if (read_argument(argc, argv) == 'h') {
+        print_manual();
+        return 0;
+    }
 
     companies = scan_names(&n);
     scan_tax(companies, n);
@@ -52,6 +56,17 @@ int main(int argc, char **argv)
 
     free(companies);
     return 0;
+}
+
+char read_argument(int argc, char **argv)
+{
+    if (argc == 2) {
+        if (!(strcmp(argv[1], "-h"))) {
+            return 'h';
+        }
+    }
+
+    return '0';
 }
 
 company_t *scan_names(int *n)

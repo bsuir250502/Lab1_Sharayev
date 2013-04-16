@@ -30,20 +30,19 @@ int input_number_in_range(int from, int to, int include_zero)
     return n;
 }
 
-int prnt_manual(int argc, char **argv)
+int print_manual(void)
 {
-    if (argc > 1 && !(strcmp(argv[1], "-h"))) {
-        printf("____________________________\n"
-               "          Manual\n"
-               "____________________________\n"
-               "1)Set names of companies separated by \"Enter\"\n"
-               "2)Set taxes of companies separated by \"Enter\"\n"
-               "3)Specify dates of payment and last dates( \"0\", if the tax has not been paid)\n"
-               "  - Year(in YYYY format)\n"
-               "  - Month (with hight letter)\n"
-               "  - day\n"
-               "4)Set date to check companies with max debts in the same way\n"
-               "5)Program print companies(<5)with biggest taxes in alphabetical sequention\n");
-    }
+    printf("____________________________\n"
+           "          Manual\n"
+           "____________________________\n"
+           "1)Set names of companies separated by \"Enter\"\n"
+           "2)Set taxes of companies separated by \"Enter\"\n"
+           "3)Specify dates of payment and last dates( \"0\", if the tax has not been paid)\n"
+           "  - Year(in YYYY format)\n"
+           "  - Month (with hight letter)\n"
+           "  - day\n"
+           "4)Set date to check companies with max debts in the same way\n"
+           "5)Program print companies(<5)with biggest taxes in alphabetical sequention\n");
+
     return 0;
 }
